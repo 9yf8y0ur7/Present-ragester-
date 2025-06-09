@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <h1 class="title">Hello World! </h1>
+      <p id="currentTime"></p>
+      <script src="script.js"></script>
+  </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Large Student List App</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f8ff;
+    margin: 20px;
+  }
+  h1 {
+    text-align: center;
+  }
+  #tableContainer {
+    max-height: 600px; /* scrollable area */
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fff;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    min-width: 80px;
+    text-align: center;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<h1>Student List App (Starting with Large Number of Entries)</h1>
+<div style="text-align: center;">
+  <button onclick="addRow()">Add New Student</button>
+</div>
+
+<div id="tableContainer">
+  <table id="studentTable">
+    <thead>
+      <tr>
+        <th>List No.</th>
+        <th>Name</th>
+        <th>Class</th>
+        <th>Fees</th>
+        <th>Registration Date</th>
+        <th>Aane Ka Din</th>
+        <th>Jane Ka Din</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows yahan add honge -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const tbody = document.querySelector('#studentTable tbody');
+  let rowCount = 0; // total rows
+
+  // Function to add a new row
+  function addRow() {
+    rowCount++;
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `
+      <td>${rowCount}</td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+      <td><button onclick="deleteRow(this)">Delete</button></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  // Function to delete a row
+  function deleteRow(btn) {
+    const row = btn.closest('tr');
+    row.remove();
+    updateSerialNumbers();
+  }
+
+  // Function to update serial numbers after deletion
+  function updateSerialNumbers() {
+    const rows = tbody.querySelectorAll('tr');
+    rowCount = 0; // reset count
+    rows.forEach((row, index) => {
+      row.querySelector('td').innerText = index + 1; // list number
+    });
+  }
+
+  // Initialize with large number of rows (example: 100)
+  const initialRows = 100; // yahan badhao jitne chahen
+  for(let i=0; i<initialRows; i++) {
+    addRow();
+  }
+</script>
+
+</body>
+</html>
